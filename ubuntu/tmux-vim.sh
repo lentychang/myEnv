@@ -21,6 +21,10 @@ apt-get install -y grip
 # prepare for install xdotool
 apt-get install -y libx11-dev libxinerama-dev libxkbcommon-x11-dev
 
+# install vim plugin
+vim -c 'PluginInstall' -c 'qa!'
+
+
 #cd /tmp
 #git clone https://github.com/jordansissel/xdotool.git
 #cd xdotool

@@ -6,9 +6,13 @@ ARG UID=1000
 ARG GID=1000
 
 USER root
-#RUN git clone https://github.com/lentychang/myEnv && \
-COPY /home/lenty/myEnv myEnv
+RUN git clone https://github.com/lentychang/myEnv 
 RUN bash myEnv/ubuntu/tmux-vim.sh && \
-    bash  myEnv/ubuntu/tmux-vim.sh   
+    bash myEnv/ubuntu/vscode.sh && \
+    bash myEnv/ubuntu/python_dev.sh
+RUN chown -R ${UID}:${GID} ~/* ~/.*
+COPY --chown=1000:1000 ./entrypoint.sh entrypoint.sh 
+RUN chmod 755 entrypoint.sh
 
 USER ${UID}:${GID}
+RUN echo "export PS1='\[\e[33m\]\u\[\e[m\e[33m\]@\[\e[m\e[33m\]\${CONTAINER_NAME} \[\e[1;34m\]\w\[\e[m\]# '" >> ~/.bashrc

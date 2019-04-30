@@ -7,6 +7,7 @@ ARG GID=1000
 # default password for user
 ARG PW=docker
 ARG ENABLE_SUDO=true
+ENV CONTAINER_NAME=myenv
 # Option1: Using unencrypted password/ specifying password
 RUN useradd -m ${USER} --uid=${UID} && \
     echo "${USER}:${PW}" | chpasswd
@@ -28,4 +29,5 @@ RUN if [ "${ENABLE_SUDO}" = "true" ] ;then \
 
 USER ${UID}:${GID}
 ENV HOME /home/${USER}
+RUN echo "export PS1='\[\e[33m\]\u\[\e[m\e[33m\]@\[\e[m\e[33m\]\${CONTAINER_NAME} \[\e[1;34m\]\w\[\e[m\]# '" >> ~/.bashrc
 WORKDIR /home/${USER}
