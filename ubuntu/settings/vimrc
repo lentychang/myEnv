@@ -1,0 +1,47 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'itchyny/lightline.vim'
+Plugin 'docker/docker'
+call vundle#end()
+
+
+" Switch syntax highlighting on
+syntax on
+syntax enable
+
+" Enable file type detection and do language-dependent indenting.
+filetype plugin indent on
+
+
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_github=1
+
+" Setting up lightline
+set laststatus=2
+set noshowmode
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+let g:lightline = {
+  \     'active': {
+  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
+  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
+  \     }
+  \ }
+
+"set number
+
+" hotkeys
+:nmap <F6> :set invnumber<CR>

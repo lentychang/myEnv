@@ -1,0 +1,14 @@
+# Dockerfile
+ARG DOCKER_BASE_IMAGE=ubuntu:18.04
+FROM ${DOCKER_BASE_IMAGE}
+ARG USER=docker
+ARG UID=1000
+ARG GID=1000
+
+USER root
+#RUN git clone https://github.com/lentychang/myEnv && \
+COPY /home/lenty/myEnv myEnv
+RUN bash myEnv/ubuntu/tmux-vim.sh && \
+    bash  myEnv/ubuntu/tmux-vim.sh   
+
+USER ${UID}:${GID}
