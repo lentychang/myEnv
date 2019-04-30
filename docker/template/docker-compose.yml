@@ -1,0 +1,46 @@
+version: '3'
+services:
+  myEnv-base:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+      args:
+        - DOCKER_BASE_IMAGE=ubuntu:18.04
+    image: myenv:base
+  myEnv-user:
+    build:
+      context: .
+      dockerfile: Dockerfile.user
+      args:
+        - DOCKER_BASE_IMAGE=myenv:base
+        - UID=1000
+        - GID=1000
+        - ENABLE_SUDO=true
+    image: myenv:user
+  myEnv:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      args:
+        - DOCKER_BASE_IMAGE=myenv:user
+        - UID=1000
+        - GID=1000
+    image: myenv:dev
+    user: '1000'
+    working_dir: /home/docker
+    entrypoint: /home/docker/entrypoint.sh
+    env_file: commonEnv.env
+    environment:
+      CONTAINER_NAME: myenv
+      ROS_IP: localhost
+    stdin_open: true
+    network_mode: host
+    volumes:
+      - $HOME/exchange:/root/exchange
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority
+    privileged: true
+    devices:
+    - /dev/bus/usb:/dev/bus/usb
+    tty: true
+    command: tail -f /dev/null 
