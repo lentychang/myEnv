@@ -17,14 +17,14 @@ RUN useradd -m ${USER} --uid=${UID} && \
 # Setup default user, when enter docker container
 
 # add localuser to sudo
-RUN if [ "${ENABLE_SUDO}" = "true" ] ;then    
-        apt-get update && apt-get install -y sudo && \
+RUN if [ "${ENABLE_SUDO}" = "true" ] ;then \ 
+        apt-get install -y sudo && \
         adduser ${USER} sudo && \
         rm -rf /var/lib/apt/list/* && \
-        echo "Sudo user enabled !!" 
-    else
-        echo "sudo disabled !!" ; 
-    fi    
+        echo "Sudo user enabled !!" ;\
+    else \
+        echo "sudo disabled !!" ; \
+    fi
 
 USER ${UID}:${GID}
 ENV HOME /home/${USER}
