@@ -20,7 +20,7 @@ apt-get install -y grip
 # https://github.com/JamshedVesuna/vim-markdown-preview
 # prepare for install xdotool
 apt-get install -y libx11-dev libxinerama-dev libxkbcommon-x11-dev
-
+rm -rf /var/lib/apt/list/*
 # install vim plugin
 vim -c 'PluginInstall' -c 'qa!'
 

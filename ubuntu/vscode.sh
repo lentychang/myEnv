@@ -13,6 +13,7 @@ install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
 sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 apt-get update
 apt-get install -y code # or code-insiders
+rm -rf /var/lib/apt/list/*
 
 #cd ~/ && \
 #dpkg -i vscode.deb || true && \
