@@ -1,13 +1,13 @@
 version: '3'
 services:
-  myEnv-base:
+  build-myEnv-base:
     build:
       context: .
       dockerfile: Dockerfile.base
       args:
         - DOCKER_BASE_IMAGE=ubuntu:18.04
     image: myenv:base
-  myEnv-user:
+  build-myEnv-user:
     build:
       context: .
       dockerfile: Dockerfile.user
@@ -28,7 +28,7 @@ services:
     image: myenv:dev
     user: '1000'
     working_dir: /home/docker
-    entrypoint: /home/docker/entrypoint.sh
+    #entrypoint: /home/docker/entrypoint.sh
     env_file: commonEnv.env
     environment:
       CONTAINER_NAME: myenv
@@ -43,4 +43,6 @@ services:
     devices:
     - /dev/bus/usb:/dev/bus/usb
     tty: true
+    # this is needed to keep the container spinning
+    # so that we can use docker exec to "enter" the container
     command: tail -f /dev/null 

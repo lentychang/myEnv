@@ -11,8 +11,11 @@ RUN bash ~/myEnv/ubuntu/tmux-vim.sh && \
     bash ~/myEnv/ubuntu/vscode.sh && \
     bash ~/myEnv/ubuntu/python_dev.sh
 RUN chown -R ${UID}:${GID} ~/* ~/.*
-COPY --chown=1000:1000 ./entrypoint.sh entrypoint.sh 
+COPY ./entrypoint.sh entrypoint.sh 
 RUN chmod 755 entrypoint.sh
 
 USER ${UID}:${GID}
+# enable conda command when using docker exec
 RUN echo "export PS1='\[\e[33m\]\u\[\e[m\e[33m\]@\[\e[m\e[33m\]\${CONTAINER_NAME} \[\e[1;34m\]\w\[\e[m\]# '" >> ~/.bashrc
+ENTRYPOINT [ "./entrypoint.sh" ]
+CMD [ "/bin/bash" ]
