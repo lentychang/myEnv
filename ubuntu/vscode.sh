@@ -6,7 +6,6 @@
 apt-get install -y libxss1 libxss-dev && \
 #wget -c https://go.microsoft.com/fwlink/?LinkID=760868 -O vscode.deb
 
-
 apt-get install -y curl apt-transport-https libxss1 libxss-dev libx11-xcb-dev libasound2
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
