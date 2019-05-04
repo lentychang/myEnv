@@ -31,3 +31,5 @@ code --user-data-dir --install-extension vector-of-bool.cmake-tools && \
 code --user-data-dir --install-extension christian-kohler.path-intellisense && \
 code --user-data-dir --install-extension visualstudioexptteam.vscodeintellicode && \
 code --user-data-dir --install-extension ajshort.ros
+
+cp settings/vscode/settings.json ~/.config/Code/User/settings.json

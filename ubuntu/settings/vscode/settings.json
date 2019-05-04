@@ -1,0 +1,9 @@
+
+{
+    "files.associations": {
+        "Dockerfile.*": "dockerfile"
+    },
+    "terminal.integrated.fontFamily": "monospace"
+
+
+}
