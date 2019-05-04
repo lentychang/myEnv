@@ -3,6 +3,7 @@ apt-get clean && \
 # setup tmux like terminator
 cp ~/myEnv/ubuntu/settings/tmux.conf ~/.tmux.conf
 cp ~/myEnv/ubuntu/settings/vimrc ~/.vimrc
+cp ~/myEnv/ubuntu/settings/global_extra_conf.py ~/.global_extra_conf.py
 # setup vundle for vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
@@ -16,14 +17,22 @@ apt-get install -y python-pip
 pip install grip
 apt-get install -y grip
 
-# [TODO] Integrate grip with vim
-# https://github.com/JamshedVesuna/vim-markdown-preview
-# prepare for install xdotool
 apt-get install -y libx11-dev libxinerama-dev libxkbcommon-x11-dev
 rm -rf /var/lib/apt/list/*
+
+# install
+apt install -y build-essential cmake python3-dev
+git clonegit clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
+cd ~/.vim/bundle/YouCompleteMe
+git submodule update --init --recursive
+ ./install.py --clang-completer --all
+
 # install vim plugin
 vim -c 'PluginInstall' -c 'qa!'
 
+# [TODO] Integrate grip with vim
+# https://github.com/JamshedVesuna/vim-markdown-preview
+# prepare for install xdotool
 
 #cd /tmp
 #git clone https://github.com/jordansissel/xdotool.git
