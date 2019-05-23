@@ -22,7 +22,7 @@ rm -rf /var/lib/apt/list/*
 
 # install
 apt install -y build-essential cmake python3-dev
-git clonegit clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
+git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
 cd ~/.vim/bundle/YouCompleteMe
 git submodule update --init --recursive
  ./install.py --clang-completer --all
