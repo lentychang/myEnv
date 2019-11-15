@@ -19,13 +19,14 @@ mkdir build && cd build
 cmake cmake -DCMAKE_PREFIX_PATH=/usr/local/pgsql ..
 sudo make install
 
+cd ../..
 rm -r postgresql-11.5 libqxx
 rm postgresql-11.5.tar.gz 
 
 chmod -R 777 /usr/local/pgsql
 
 
-/usr/local/pgsql/bin/initdb -D ~/db_data/pgdata --username=pgdb --pwfile=./settings/postgre_pw.txt
+/usr/local/pgsql/bin/initdb -D ~/db_data/pgdata --username=postgres --pwfile=./settings/postgres_pw.txt
 
 #WARNING: enabling "trust" authentication for local connections
 #You can change this by editing pg_hba.conf or using the option -A, or
@@ -33,7 +34,7 @@ chmod -R 777 /usr/local/pgsql
 #
 #Success. You can now start the database server using:
 #
-#    /usr/local/pgsql/bin/pg_ctl -D /home/lenty/db_data/pgdata -l logfile start
+/usr/local/pgsql/bin/pg_ctl -D /home/lenty/db_data/pgdata -l /tmp/logfile start
 #
 # You can use pgadmin3 to configure database
 # /usr/local/pgsql/createdb to create database
