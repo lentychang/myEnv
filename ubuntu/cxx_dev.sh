@@ -22,8 +22,8 @@ apt-get install -y ccache && \
 #ln -s $(which ccache) c++ && \
 #ln -s $(which ccache) cc && \
 echo "export CCACHE_DIR=/tmp/.cache" >> ~/.bashrc && \
-echo "export set CC='ccache gcc'" >> ~/.bashrc && \
-echo "export set CXX='ccache g++'" >> ~/.bashrc && \
+echo "export set CC='/usr/lib/ccache/gcc'" >> ~/.bashrc && \
+echo "export set CXX='/usr/lib/ccache/g++'" >> ~/.bashrc && \
 echo "export PATH=/usr/lib/ccache:\$PATH" >> ~/.bashrc
 
 echo "alias catkin_make='catkin_make -DCMAKE_C_COMPILER=/usr/local/bin-ccache/gcc -DCMAKE_CXX_COMPILER=/usr/local/bin-ccache/g++'" >> ~/.bashrc
@@ -31,5 +31,5 @@ echo "alias catkin_make='catkin_make -DCMAKE_C_COMPILER=/usr/local/bin-ccache/gc
 #install gold-linker to accelerate linking
 # since ubuntu 18, binutils-gold is put in binutils
 apt-get install -y binutils-gold && \
-update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin//usr/bin/x86_64-linux-gnu-ld.gold" 20 && \
-update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin//usr/bin/x86_64-linux-gnu-ld.bfd" 10
+update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/x86_64-linux-gnu-ld.gold" 20 && \
+update-alternatives --install "/usr/bin/ld" "ld" "/usr/bin/x86_64-linux-gnu-ld.bfd" 10

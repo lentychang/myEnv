@@ -9,6 +9,7 @@ sudo apt update
 sudo apt install -y -V libarrow-dev # For C++
 sudo apt install -y -V libarrow-glib-dev # For GLib (C)
 sudo apt install -y -V libarrow-flight-dev # For Flight C++
+sudo apt install -y -V libarrow-dataset-dev libarrow-python-dev
 sudo apt install -y -V libplasma-dev # For Plasma C++
 sudo apt install -y -V libplasma-glib-dev # For Plasma GLib (C)
 sudo apt install -y -V libgandiva-dev # For Gandiva C++
