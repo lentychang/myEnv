@@ -5,9 +5,7 @@ apt-get install -y\
     ca-certificates \
     curl \
     gnupg-agent \
-    software-properties-common \
-    openssh-server \
-    xorg
+    software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 apt-key fingerprint 0EBFCD88
 add-apt-repository \
@@ -16,7 +14,7 @@ add-apt-repository \
    stable"
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
-curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 # allow root user to display gui on desktop(for gui in docker container)
@@ -34,3 +32,11 @@ usermod -aG docker $USER
 # start docker daemon when os startup
 systemctl enable docker
 
+
+
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+apt-get update && sudo apt-get install -y nvidia-container-toolkit
+systemctl restart docker

@@ -1,8 +1,8 @@
 #!/bin/bash
 # basic
 apt-get clean && \
-    apt-get update && apt-get -y install \
-    htop \
+    apt-get update 
+apt-get -y install htop \
     build-essential \
     apt-utils \    
     ssh \

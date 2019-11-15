@@ -1,6 +1,5 @@
 #!/bin/bash
-apt-get -y install \ 
-    terminator \
+apt-get -y install terminator \
     indicator-multiload \
     wakeonlan
 
