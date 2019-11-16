@@ -16,3 +16,18 @@ sudo apt install -y -V libgandiva-dev # For Gandiva C++
 sudo apt install -y -V libgandiva-glib-dev # For Gandiva GLib (C)
 sudo apt install -y -V libparquet-dev # For Apache Parquet C++
 sudo apt install -y -V libparquet-glib-dev # For Apache Parquet GLib (C)
+
+
+# install dependency
+sudo apt install -y automake flex bison autopoint intltool autoconf libtool gettext libboost-all-dev libevent-dev libssl-dev libtool make pkg-config
+
+git clone https://github.com/apache/thrift.git
+cd thrift && git checkout tags/0.10.0 -b v10 && ./boostrap.sh
+./configure --with-java=no --with-lua=no && make -j3 && sudo make install
+git checkout master && ./boostrap.sh && ./configure && make -j3 && sudo make install
+cd .. && rm -r thrift
+
+git clone https://github.com/apache/arrow.git && cd arrow/cpp
+mkdir release && cd release
+cmake -DARROW_PARQUET=ON -DARROW_USE_LD_GOLD=ON ..
+make -j3 && sudo make install
