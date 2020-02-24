@@ -1,0 +1,82 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++ build active file",
+            "command": "/usr/lib/ccache/g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-Weffc++",
+                "-Wall",
+                "-Wextra",
+                "-Wsign-conversion",
+                "-pedantic-errors"
+            ],
+            "options": {
+                "cwd": "/usr/lib/ccache"
+            },
+            "group": "build",
+            "problemMatcher": [
+                {"base":"$gcc",
+                    "fileLocation":["absolute"]}
+            ]
+        },
+        {
+            "label": "cmake",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build"
+            },
+            "command": "cmake",
+            "group": "build",
+            "args": [
+                "-G",
+                "Unix Makefiles",
+                "${workspaceRoot}"
+            ]
+        },
+        {
+            "label": "make current",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build",
+                },
+            "command": "make -j3 ${fileBasenameNoExtension}",
+            "group": "build",
+            "problemMatcher": [
+                {"base":"$gcc",
+                    "fileLocation":["absolute"]}
+            ]
+        },
+        {
+            "label": "clean re-make current",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build",
+                },
+            "command": "make clean && make -j3 ${fileBasenameNoExtension}",
+            "group": "build",
+            "problemMatcher": [
+                {"base":"$gcc",
+                "fileLocation":["absolute"]}
+            ]
+        },
+        {
+            "label": "clean, remake all",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build",
+                },
+            "command": "rm -rf * && cmake .. && make -j3 all",
+            "problemMatcher": [
+                {"base":"$gcc",
+                    "fileLocation":["autoDetect"]}
+            ],
+            "group": "build"
+        }
+    ],
+    "version": "2.0.0"
+}

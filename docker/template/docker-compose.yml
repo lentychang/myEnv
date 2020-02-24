@@ -31,8 +31,8 @@ services:
     #entrypoint: /home/docker/entrypoint.sh
     env_file: commonEnv.env
     environment:
-      CONTAINER_NAME: myenv
-      ROS_IP: localhost
+      - CONTAINER_NAME=myenv
+      - ROS_IP=localhost
     stdin_open: true
     network_mode: host
     volumes:
