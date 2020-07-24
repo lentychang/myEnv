@@ -1,0 +1,36 @@
+#!/bin/bash
+#! / bin / bash
+#
+#######################
+# GENERAL INFORMATION #
+#######################
+#
+# - This script enables / disables wake up from suspend# for USB devices.
+#
+# - The script needs execution permissions.
+#
+# - For this script to be executed when the system starts, there must be
+#   a symbolic link to it in /etc/rc3.d/ with priority S01
+#   (for example: /etc/rc3.d/S01usbwakeup)
+#
+###########################
+# RELATED USEFUL COMMANDS #
+###########################
+#
+# - Identify USB devices:
+#   grep . /sys/bus/usb/devices/*/product
+#
+# - Check the status of "wake up of the suspension" of USB devices:
+#   grep . /sys/bus/usb/devices/*/power/wakeup
+#
+#
+##################
+# SCRIPT ACTIONS #
+##################
+#
+# Disables wake up from suspend for optical mouse
+echo disabled > /sys/bus/usb/devices/1-6/power/wakeup
+#
+# Enables wake up from suspend for the wireless keyboard
+# that I have connected to a USB 2.0 HUB in the USB port nr.6
+echo enabled > /sys/bus/usb/devices/5-1/power/wakeup 

@@ -1,5 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype on                  " required
+filetype plugin on
+set path+=**
+
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -12,12 +15,20 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'itchyny/lightline.vim'
 Plugin 'docker/docker'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
 let g:ycm_use_clangd = 0
 autocmd BufRead,BufNewFile Dockerfile.* set filetype=dockerfile
 
+" set up for netrw
+let g:netrw_banner=0 "disable annoying banner
+let g:netrw_browse_split=4 "open in prior window
+let g:netrw_altv=1 " open splits to the right
+let g:netrw_liststyle=3 " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_winsize = 25
 
 " Switch syntax highlighting on
 syntax on
@@ -45,10 +56,13 @@ let g:lightline = {
   \     }
   \ }
 
+" set hiden char
+:set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
 "set number
 
 " hotkeys
 :nmap <F6> :set invnumber<CR>
+:nmap <F2> :set list!<CR>
 
 " set for c++ autocomplete
 let g:ycm_python_interpreter_path = ''

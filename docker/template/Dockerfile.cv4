@@ -1,0 +1,36 @@
+FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND=noninteractive
+ARG VENV_NAME=opencv4
+ENV ENVNAME=${VENV_NAME}
+
+WORKDIR /root
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y build-essential cmake pkg-config git &&\
+    rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y libjpeg-dev libpng-dev libtiff-dev libavcodec-dev \
+      libavformat-dev libswscale-dev libv4l-dev libxvidcore-dev libx264-dev \
+      libgtk-3-dev libatlas-base-dev gfortran python3-dev python3-pip python3-venv && \
+    rm -rf /var/lib/apt/lists/*
+RUN git clone --depth=1 https://github.com/opencv/opencv.git && git clone --depth=1 https://github.com/opencv/opencv_contrib.git
+RUN python3 -m venv /root/.venv/${VENV_NAME}
+#SHELL ["/bin/bash","-c"]
+RUN . /root/.venv/${VENV_NAME}/bin/activate && pip install numpy
+RUN cd opencv && mkdir build && cd build &&\
+    cmake -DCMAKE_BUILD_TYPE=RELEASE \
+	-DCMAKE_INSTALL_PREFIX=/usr/local \
+	-DINSTALL_PYTHON_EXAMPLES=ON \
+	-DINSTALL_C_EXAMPLES=OFF \
+	-DOPENCV_ENABLE_NONFREE=ON \
+	-DOPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
+	-DPYTHON3_EXECUTABLE=/root/.venv/${VENV_NAME}/bin/python \
+        -DPYTHON3_INCLUDE_DIR=/usr/include/python3.6m \
+        -DPYTHON3_NUMPY_INCLUDE_DIRS=/root/.venv/${VENV_NAME}/lib/python3.6/site-packages/numpy/core/include \
+	-DBUILD_EXAMPLES=ON .. &&\
+    make -j$(expr $(cat /proc/cpuinfo | grep -c ^process) - 1) && make install && ldconfig
+
+RUN ln -s /usr/local/lib/python3.6/site-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so /root/.venv/${VENV_NAME}/lib/python3.6/site-packages/cv2.so
+COPY entrypoint_venv.sh /entrypoint.sh
+RUN sed -i "s/ENVNAME/${ENVNAME}/g" /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+RUN echo "source /root/.venv/${ENVNAME}/bin/activate" >> ~/.bashrc
+ENTRYPOINT ["/entrypoint.sh"]
