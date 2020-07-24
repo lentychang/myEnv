@@ -1,5 +1,5 @@
 apt-get clean && \
-    apt-get update && apt-get -y install tmux vim build-essential
+    apt-get update && apt-get -y install tmux vim build-essential xclip
 # setup tmux like terminator
 cp ~/myEnv/ubuntu/settings/tmux.conf ~/.tmux.conf
 cp ~/myEnv/ubuntu/settings/vimrc ~/.vimrc
@@ -25,7 +25,7 @@ apt install -y build-essential cmake python3-dev
 git clone https://github.com/Valloric/YouCompleteMe ~/.vim/bundle/YouCompleteMe
 cd ~/.vim/bundle/YouCompleteMe
 git submodule update --init --recursive
- ./install.py --clang-completer --all
+ ./install.py --clang-completer
 
 # install vim plugin
 vim -c 'PluginInstall' -c 'qa!'
