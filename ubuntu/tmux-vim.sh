@@ -1,9 +1,12 @@
 apt-get clean && \
     apt-get update && apt-get -y install tmux vim build-essential xclip
 # setup tmux like terminator
-cp ~/myEnv/ubuntu/settings/tmux.conf ~/.tmux.conf
-cp ~/myEnv/ubuntu/settings/vimrc ~/.vimrc
-cp ~/myEnv/ubuntu/settings/global_extra_conf.py ~/.global_extra_conf.py
+#cp ~/myEnv/ubuntu/settings/tmux.conf ~/.tmux.conf
+#cp ~/myEnv/ubuntu/settings/vimrc ~/.vimrc
+#cp ~/myEnv/ubuntu/settings/global_extra_conf.py ~/.global_extra_conf.py
+
+cat tmux_bash_history_fix.sh >> ~/.bashrc
+
 # setup vundle for vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
